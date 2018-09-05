@@ -1,5 +1,8 @@
-const AppointmentsList = createReactClass({
-  render: function() {
+import React from 'react'
+import Appointment from './appointment'
+
+export class AppointmentsList extends React.Component {
+  render() {
     return (
       <div>
         {this.props.appointments.map(function(appointment, i){
@@ -10,4 +13,4 @@ const AppointmentsList = createReactClass({
       </div>
     )
   }
-})
+}
