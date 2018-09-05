@@ -1,5 +1,19 @@
 {
   "name": "calreact",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "axios": "^0.18.0",
+    "babel-preset-react": "^6.24.1",
+    "immutability-helper": "^2.7.1",
+    "jquery.csrf": "^0.1.0",
+    "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-datetime": "^2.15.0",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
 }
