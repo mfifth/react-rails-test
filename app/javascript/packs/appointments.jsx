@@ -1,36 +1,32 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import AppointmentForm from './appointment_form'
+import { AppointmentForm } from './appointment_form'
 import { AppointmentsList } from './appointments_list'
 
-export default class Appointments extends React.Component {
-  constructor(props) {
-		super(props)
-		this.state = {
-      appointments: this.props.appointments,
-      title: "Morning Meeting",
-      apptTime: "Tomorrow at 9AM"
-		}
+class Appointments extends Component {
+	state = {
+    appointments: this.props.appointments,
+    title: "Morning Meeting",
+    apptTime: "Tomorrow at 9AM"
 	}
 
   handleUserInput(e) {
-    this.setState({ ...this.state, [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   addNewAppointment(appointment) {
-    var newArray = this.state.appointments
-    newArray.push(appointment)
     this.setState({
-      appointments: newArray
+      appointments: [...this.state.appointments, appointment]
     });
   }
 
   submitForm(e) {
     e.preventDefault();
-    var appointment = {title: this.state.title, appt_time: this.state.apptTime}
-    $.post('/appointments', {appointment: appointment}).done((data) => {
-      this.addNewAppointment(data)
-    });
+
+    const appointment = { title: this.state.title, appt_time: this.state.apptTime }
+    $.post('/appointments', { appointment }).done((data) => this.addNewAppointment(data));
   }
 
   render() {

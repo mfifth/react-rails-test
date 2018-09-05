@@ -1,7 +1,7 @@
 import React from 'react'
 import DateTime from 'react-datetime'
 
-export default class AppointmentForm extends React.Component {
+export class AppointmentForm extends React.Component {
   render() {
     return (
       <div>
