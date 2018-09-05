@@ -18,10 +18,20 @@ export default class Appointments extends React.Component {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   }
 
+  addNewAppointment(appointment) {
+    var newArray = this.state.appointments
+    newArray.push(appointment)
+    this.setState({
+      appointments: newArray
+    });
+  }
+
   submitForm(e) {
     e.preventDefault();
     var appointment = {title: this.state.title, appt_time: this.state.apptTime}
-    $.post('/appointments', {appointment: appointment})
+    $.post('/appointments', {appointment: appointment}).done((data) => {
+      this.addNewAppointment(data)
+    });
   }
 
   render() {
