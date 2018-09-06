@@ -18,7 +18,6 @@ export default props => {
           )}
         />
         <Route exact path="/appointments/:id" component={Appointment} />
-        <Route exact path="/" component={AppHeader} />
       </div>
     </BrowserRouter>
   );
