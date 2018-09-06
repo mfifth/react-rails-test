@@ -9,12 +9,14 @@ class Appointments extends Component {
     appointments: this.props.appointments,
     title: "Morning Meeting",
     apptTime: "9AM",
-    formErrors: {}
+    formErrors: {},
+    formValid: true
   };
 
   handleUserInput(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      formValid: this.state.title.length > 3
     });
   }
 
@@ -54,6 +56,7 @@ class Appointments extends Component {
           apptTime={this.state.apptTime}
           onUserInput={this.handleUserInput.bind(this)}
           handleSubmit={this.submitForm.bind(this)}
+          formValid={this.state.formValid}
         />
         <AppointmentsList appointments={this.state.appointments} />
       </div>
