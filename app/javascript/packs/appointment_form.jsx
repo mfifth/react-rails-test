@@ -2,6 +2,11 @@ import React from 'react'
 import DateTime from 'react-datetime'
 
 export class AppointmentForm extends React.Component {
+  setApptTime = (e) => {
+    console.log(e)
+    this.setState({appt_time: this._d})
+  }
+
   render() {
     return (
       <div>
@@ -12,11 +17,14 @@ export class AppointmentForm extends React.Component {
             placeholder='Appointment Title'
             value={this.props.title}
             onChange={this.props.onUserInput} />
-          <input
-            name='apptTime'
-            placeholder="Appointment Time"
-            value={this.props.apptTime}
-            onChange={this.props.onUserInput} />
+
+          <DateTime
+            input={false}
+            open={true}
+            name='appt_time'
+            value={this.props.appt_time}
+            onChange={this.setApptTime} />
+
           <input type='submit' value='Make Appointment' />
         </form>
       </div>
