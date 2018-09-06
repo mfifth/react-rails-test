@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { AppointmentForm } from "./appointment_form";
-import { AppointmentsList } from "./appointments_list";
-import { FormErrors } from "./form_errors";
+import AppRouter from "./AppRouter";
+import { AppointmentForm } from "./AppointmentForm";
+import { AppointmentsList } from "./AppointmentsList";
+import { FormErrors } from "./FormErrors";
 
-class Appointments extends Component {
+export default class Appointments extends Component {
   state = {
     appointments: this.props.appointments,
     title: "Morning Meeting",
@@ -13,10 +14,14 @@ class Appointments extends Component {
     formValid: true
   };
 
+  static defaultProps = {
+    appointments: []
+  };
+
   handleUserInput(e) {
     this.setState({
       [e.target.name]: e.target.value,
-      formValid: this.state.title.length > 3
+      formValid: this.state.title.length > 5
     });
   }
 
@@ -44,6 +49,18 @@ class Appointments extends Component {
       .fail(this.addNewError.bind(this));
   }
 
+  componentDidMount() {
+    if (this.props.match) {
+      $.ajax({
+        type: "GET",
+        url: "/appointments",
+        dataType: "JSON"
+      }).done(data => {
+        this.setState({ appointments: data });
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -69,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const data = JSON.parse(node.getAttribute("data"));
 
   ReactDOM.render(
-    <Appointments appointments={data} />,
+    <AppRouter appointments={data} />,
     document.body.appendChild(document.createElement("div"))
   );
 });
