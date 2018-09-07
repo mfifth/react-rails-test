@@ -19,16 +19,26 @@ export default class Appointments extends Component {
   };
 
   handleUserInput(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-      formValid: this.state.title.length > 5
-    });
+    if (e._isAMomentObject) {
+      this.setState({ apptTime: e.format() });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value,
+        formValid: this.state.title.length > 5
+      });
+    }
+  }
+
+  setApptTime(e) {
+    console.log(e);
+    this.setState({ apptTime: e.format() });
+    console.log(this.state);
   }
 
   addNewAppointment(appointment) {
     this.setState({
       appointments: [...this.state.appointments, appointment],
-      formErrors: {}
+      formErrors: {} // Reset form errors
     });
   }
 
@@ -72,6 +82,7 @@ export default class Appointments extends Component {
           title={this.state.title}
           apptTime={this.state.apptTime}
           onUserInput={this.handleUserInput.bind(this)}
+          onDateChange={this.setApptTime.bind(this)}
           handleSubmit={this.submitForm.bind(this)}
           formValid={this.state.formValid}
         />

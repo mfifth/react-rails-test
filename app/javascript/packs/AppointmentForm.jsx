@@ -1,39 +1,28 @@
 import React from "react";
 import DateTime from "react-datetime";
 
-export class AppointmentForm extends React.Component {
-  setApptTime = e => {
-    console.log(e);
-    this.setState({ appt_time: this._d });
-  };
-
-  render() {
-    return (
-      <div>
-        <h2>Make a new Appointment</h2>
-        <form onSubmit={this.props.handleSubmit}>
-          <input
-            name="title"
-            placeholder="Appointment Title"
-            value={this.props.title}
-            onChange={this.props.onUserInput}
-          />
-
-          <DateTime
-            input={false}
-            open={true}
-            name="appt_time"
-            value={this.props.appt_time}
-            onChange={this.setApptTime}
-          />
-
-          <input
-            type="submit"
-            value="Make Appointment"
-            disabled={!this.props.formValid}
-          />
-        </form>
-      </div>
-    );
-  }
-}
+export const AppointmentForm = props => (
+  <div>
+    <h2>Make a new Appointment</h2>
+    <form onSubmit={props.handleSubmit}>
+      <input
+        name="title"
+        placeholder="Appointment Title"
+        value={props.title}
+        onChange={props.onUserInput}
+      />
+      <DateTime
+        input={false}
+        open={true}
+        name="appt_time"
+        value={props.appt_time}
+        onChange={props.onUserInput}
+      />
+      <input
+        type="submit"
+        value="Make Appointment"
+        disabled={!props.formValid}
+      />
+    </form>
+  </div>
+);
