@@ -19,11 +19,7 @@ export default props => {
           )}
         />
         <Route exact path="/appointments/:id" component={Appointment} />
-        <Route
-          exact
-          path="/appointments/:id/edit"
-          component={AppointmentForm}
-        />
+        <Route path="/appointments/:id/edit" component={AppointmentForm} />
       </div>
     </BrowserRouter>
   );

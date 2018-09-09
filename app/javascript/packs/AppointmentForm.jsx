@@ -8,7 +8,8 @@ export default class AppointmentForm extends React.Component {
     title: "Morning Coffee",
     apptTime: moment().format(),
     formErrors: {},
-    titleValid: true
+    titleValid: true,
+    editing: false
   };
 
   handleUserInput = e => {
@@ -28,16 +29,46 @@ export default class AppointmentForm extends React.Component {
 
   submitForm = e => {
     e.preventDefault();
+    this.state.editing ? this.updateAppointment() : this.addAppointment();
+  };
 
+  updateAppointment() {
     const appointment = {
-      title: this.state.title,
-      appt_time: this.state.apptTime
+      appointment: { title: this.state.title, appt_time: this.state.apptTime }
     };
 
-    $.post("/appointments", { appointment })
+    $.ajax({
+      url: `/appointments/${this.props.match.params.id}`,
+      method: "PATCH",
+      data: appointment
+    })
       .done(this.props.handleNewAppointment)
       .fail(this.addNewError);
-  };
+  }
+
+  addAppointment() {
+    $.post("/appointments", {
+      appointment: { title: this.state.title, appt_time: this.state.apptTime }
+    })
+      .done(this.props.handleNewAppointment)
+      .fail(this.addNewError);
+  }
+
+  componentDidMount() {
+    if (this.props.match) {
+      $.ajax({
+        type: "GET",
+        url: `/appointments/${this.props.match.params.id}`,
+        dataType: "JSON"
+      }).done(appointment => {
+        this.setState({
+          title: appointment.title,
+          apptTime: appointment.appt_time,
+          editing: this.props.match.path === "/appointments/:id/edit"
+        });
+      });
+    }
+  }
 
   render() {
     return (

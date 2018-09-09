@@ -14,10 +14,10 @@ export default class Appointments extends Component {
     formErrors: {}
   };
 
-  addNewAppointment = appointment => {
+  handleAppointment = appointment => {
     this.setState({
       appointments: [...this.state.appointments, appointment],
-      formErrors: {} // Reset form errors
+      formErrors: {}
     });
   };
 
@@ -36,7 +36,7 @@ export default class Appointments extends Component {
   render() {
     return (
       <div>
-        <AppointmentForm handleNewAppointment={this.addNewAppointment} />
+        <AppointmentForm handleNewAppointment={this.handleAppointment} />
         <AppointmentsList appointments={this.state.appointments} />
       </div>
     );
