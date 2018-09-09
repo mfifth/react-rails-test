@@ -58,7 +58,7 @@ export default class AppointmentForm extends React.Component {
             input={false}
             open={true}
             name="appt_time"
-            value={this.state.apptTime}
+            value={moment(this.state.apptTime)}
             onChange={this.handleUserInput}
           />
           <input
