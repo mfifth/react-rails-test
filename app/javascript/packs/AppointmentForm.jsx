@@ -50,9 +50,28 @@ export default class AppointmentForm extends React.Component {
     $.post("/appointments", {
       appointment: { title: this.state.title, appt_time: this.state.apptTime }
     })
-      .done(this.props.handleNewAppointment)
+      .done(data => {
+        this.props.handleNewAppointment(data);
+        this.setState({ formErrors: {} });
+      })
       .fail(this.addNewError);
   }
+
+  deleteAppointment = () => {
+    $.ajax({
+      type: "DELETE",
+      url: `/appointments/${this.props.match.params.id}`
+    })
+      .done(data => {
+        console.log("Appointment deleted.");
+        this.setState({ formErrors: {} });
+        this.props.history.push("/");
+      })
+      .fail(response => {
+        console.log("Appointment deleting failed!");
+        console.log(response);
+      });
+  };
 
   componentDidMount() {
     if (this.props.match) {
@@ -98,6 +117,12 @@ export default class AppointmentForm extends React.Component {
             disabled={!this.state.titleValid}
           />
         </form>
+
+        {this.state.editing && (
+          <p>
+            <button onClick={this.deleteAppointment}>Delete Appointment</button>
+          </p>
+        )}
       </div>
     );
   }
