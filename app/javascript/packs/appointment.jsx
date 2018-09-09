@@ -31,6 +31,10 @@ export default class Appointment extends Component {
           <h3>{this.state.appointment.title}</h3>
         </Link>
         <p>{this.state.appointment.appt_time}</p>
+
+        <Link to={`/appointments/${this.state.appointment.id}/edit`}>
+          <h3>Edit</h3>
+        </Link>
       </div>
     );
   }
