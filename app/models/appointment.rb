@@ -3,6 +3,8 @@ class Appointment < ApplicationRecord
   validates :title, length: {minimum: 5}
   validate :appt_time_is_present?
 
+  belongs_to :user
+
   private
 
   def appt_time_is_present?

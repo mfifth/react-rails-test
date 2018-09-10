@@ -1,2 +1,7 @@
+- if user_signed_in?
+  = "#{current_user.email} is signed in"
+  %br
+  = link_to "Sign Out", destroy_user_session_path, method: :delete
+
 #appointments_data{data: @appointments.to_json}
 = javascript_pack_tag 'AppRouter'

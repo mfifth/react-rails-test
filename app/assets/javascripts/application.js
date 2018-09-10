@@ -13,5 +13,6 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
+//= require jquery_ujs
 //= require jquery.csrf
 //= require_tree .
