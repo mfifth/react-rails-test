@@ -42,13 +42,3 @@ export default class Appointments extends Component {
     );
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const node = document.getElementById("appointments_data");
-  const data = JSON.parse(node.getAttribute("data"));
-
-  ReactDOM.render(
-    <AppRouter appointments={data} />,
-    document.body.appendChild(document.createElement("div"))
-  );
-});
