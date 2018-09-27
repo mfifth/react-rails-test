@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import AppRouter from "./AppRouter";
 import AppointmentForm from "./AppointmentForm";
 import { AppointmentsList } from "./AppointmentsList";
+import { getAppointments } from "./UserLogic";
 
 export default class Appointments extends Component {
   state = {
@@ -27,9 +28,14 @@ export default class Appointments extends Component {
         type: "GET",
         url: "/appointments",
         dataType: "JSON"
-      }).done(data => {
-        this.setState({ appointments: data });
-      });
+      })
+        .success(data => {
+          console.log(data);
+          this.setState({ appointments: data });
+        })
+        .error(errors => {
+          console.log(errors);
+        });
     }
   }
 

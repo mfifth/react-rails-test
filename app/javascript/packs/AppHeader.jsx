@@ -8,6 +8,10 @@ export class AppHeader extends React.Component {
         <Link to="/">
           <h1>CalReact</h1>
         </Link>
+
+        <button className="logout-btn" onClick={this.props.handleLogout}>
+          Click here to logout
+        </button>
       </div>
     );
   }
