@@ -22,9 +22,9 @@ class AppRouter extends React.Component {
   };
 
   componentDidMount() {
-    let token = localStorage.getItem("token");
-    if (token) {
-      this.setState({ token: token });
+    if (window.performance && window.performance.navigation.type == 1) {
+      localStorage.removeItem("token");
+      this.setState({ token: null });
     }
   }
 
@@ -68,13 +68,14 @@ class AppRouter extends React.Component {
       <BrowserRouter>
         {this.state.token ? (
           <div>
+            <Route path="/" component={AppHeader} path="/" />
             <Route
+              exact
               path="/"
               render={() => (
-                <AppHeader handleLogout={this.logoutUser.bind(this)} />
+                <Appointments handleLogout={this.logoutUser.bind(this)} />
               )}
             />
-            <Route exact path="/" component={Appointments} />
             <Route exact path="/appointments/:id" component={Appointment} />
             <Route path="/appointments/:id/edit" component={AppointmentForm} />
           </div>

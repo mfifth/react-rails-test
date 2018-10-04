@@ -6,12 +6,8 @@ export class AppHeader extends React.Component {
     return (
       <div>
         <Link to="/">
-          <h1>CalReact</h1>
+          <h1 style={{ textAlign: "center" }}>React Calendar</h1>
         </Link>
-
-        <button className="logout-btn" onClick={this.props.handleLogout}>
-          Click here to logout
-        </button>
       </div>
     );
   }

@@ -91,38 +91,47 @@ export default class AppointmentForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="input-appointment">
         <h2>Make a new Appointment</h2>
         <FormErrors formErrors={this.state.formErrors} />
-        <h3>
-          {this.state.title} {this.state.apptTime}
-        </h3>
+        <h3>{this.state.title}</h3>
+        <h3>{moment(this.state.apptTime).format("MMMM Do YYYY, h:mm:ss a")}</h3>
         <form onSubmit={this.submitForm}>
-          <input
-            name="title"
-            placeholder="Appointment Title"
-            value={this.state.title}
-            onChange={this.handleUserInput}
-          />
-          <DateTime
-            input={false}
-            open={true}
-            name="appt_time"
-            value={moment(this.state.apptTime)}
-            onChange={this.handleUserInput}
-          />
-          <input
-            type="submit"
-            value="Make Appointment"
-            disabled={!this.state.titleValid}
-          />
+          <div className="form-wrapper">
+            <input
+              name="title"
+              placeholder="Appointment Title"
+              value={this.state.title}
+              onChange={this.handleUserInput}
+            />
+          </div>
+          <div className="form-wrapper">
+            <DateTime
+              input={false}
+              open={true}
+              name="appt_time"
+              value={moment(this.state.apptTime)}
+              onChange={this.handleUserInput}
+            />
+          </div>
+          <div className="form-wrapper">
+            <input
+              type="submit"
+              value={
+                this.state.editing ? "Update Appointment" : "Create Appointment"
+              }
+              disabled={!this.state.titleValid}
+            />
+          </div>
         </form>
-
         {this.state.editing && (
           <p>
             <button onClick={this.deleteAppointment}>Delete Appointment</button>
           </p>
         )}
+        <button className="logout-btn" onClick={this.props.handleLogout}>
+          Click here to logout
+        </button>
       </div>
     );
   }

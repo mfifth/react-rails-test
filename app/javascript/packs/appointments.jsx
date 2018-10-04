@@ -23,26 +23,28 @@ export default class Appointments extends Component {
   };
 
   componentDidMount() {
-    if (this.props.match) {
-      $.ajax({
-        type: "GET",
-        url: "/appointments",
-        dataType: "JSON"
+    console.log(this.state);
+    $.ajax({
+      type: "GET",
+      url: "/appointments",
+      dataType: "JSON"
+    })
+      .success(data => {
+        console.log(data);
+        this.setState({ appointments: data });
       })
-        .success(data => {
-          console.log(data);
-          this.setState({ appointments: data });
-        })
-        .error(errors => {
-          console.log(errors);
-        });
-    }
+      .error(errors => {
+        console.log(errors);
+      });
   }
 
   render() {
     return (
       <div>
-        <AppointmentForm handleNewAppointment={this.handleAppointment} />
+        <AppointmentForm
+          handleNewAppointment={this.handleAppointment}
+          handleLogout={this.props.handleLogout}
+        />
         <AppointmentsList appointments={this.state.appointments} />
       </div>
     );

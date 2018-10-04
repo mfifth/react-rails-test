@@ -31,20 +31,6 @@ export const createUser = data => {
     });
 };
 
-export const getAppointments = () => {
-  return $.ajax({
-    type: "GET",
-    url: "/appointments",
-    dataType: "JSON"
-  })
-    .success(data => {
-      data;
-    })
-    .error(errors => {
-      console.log(errors);
-    });
-};
-
 export const setupAuthToken = token => {
   $.ajaxSetup({
     headers: { Authorization: "Bearer " + token }

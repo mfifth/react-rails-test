@@ -32,7 +32,7 @@ export const UserForm = props => {
 
       <FormGroup>
         <Button onClick={props.toggleUserState}>
-          {props.newUser ? "Click here to sign in" : "Click here to signup"}
+          {props.newUser ? "Click here to sign in" : "Click here to sign up"}
         </Button>
       </FormGroup>
     </Form>
